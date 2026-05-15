@@ -2,10 +2,6 @@
 
 > **Legal Document AI Workflow** — built for the fictional Pearson Specter Litt. Messy documents in, grounded drafts out, smarter with every operator edit.
 
-
-
----
-
 ## What it does
 
 
@@ -17,29 +13,78 @@
 | **Improvement from Edits** | Operator edits → aligned (Hungarian) → classified → four memory stores (terminology, section rules, exemplars, structural prefs) → next draft is measurably better on **held-out** matters. |
 
 
----
-
-## Quick start
+## 1 · Set up the backend
 
 ```bash
-# one-time setup
-make setup
+git clone git@github.com:Hasib303/LegalDocumentRAG.git nerdfarm
+cd nerdfarm/backend
 
-# end-to-end demo on the bundled corpus
-make demo
+cp .env.example .env
+# Open .env and paste your two free keys:
+#   GEMINI_API_KEY=AIza...
+#   GROQ_API_KEY=gsk_...
+
+make setup        # uv sync --extra dev   (~3–5 min first time)
 ```
 
-The demo:
+---
 
-1. Ingests `backend/data/{clean_borndigital, scanned_*}/` — 13 real public legal PDFs (313 pages)
-2. Generates Draft v1 for Matter A
-3. Applies bundled operator edits from `backend/samples/edits/`
-4. Re-drafts a held-out Matter B with and without the learned memory
-5. Prints an A/B comparison: edit-distance reduction · terminology adherence · rule compliance
+## 2 · Run the end-to-end CLI demo (fastest path)
 
-Runs in under 5 minutes on Apple Silicon with 16 GB RAM.
+```bash
+make demo         # from backend/
+```
 
 ---
+
+## 3 · Run the API + Streamlit UI (operator workflow)
+
+**Terminal 1 — FastAPI**
+
+```bash
+cd backend
+uv run uvicorn app.api.main:app --reload --port 8000
+# Interactive docs: http://localhost:8000/docs
+```
+
+**Terminal 2 — Streamlit**
+
+```bash
+cd frontend
+uv venv && source .venv/bin/activate          # or:  python3 -m venv .venv && source .venv/bin/activate
+uv pip install -r requirements.txt            # or:  python3 -m pip install -r requirements.txt
+streamlit run src/app.py
+# UI: http://localhost:8501
+```
+
+In the UI:
+
+
+| Tab          | What it does                                                                                               |
+| ------------ | ---------------------------------------------------------------------------------------------------------- |
+| **Draft**    | Pick a matter, click "Draft now" → backend ingests/indexes (idempotent) + drafts → markdown renders inline |
+| **Edit**     | Paste the modified markdown → backend aligns + classifies + updates style memory → returns the new version |
+| **Evidence** | Enter `draft_id` + `bullet_id` → see the exact source chunks (text + page range)                           |
+
+
+Sidebar has a "Health check" button to confirm the backend is reachable.
+
+---
+
+## 4 · Run everything in Docker (alternative)
+
+```bash
+# from repo root
+cp backend/.env.example .env
+# add your two keys in .env (note: this .env lives at the repo root for compose)
+
+docker compose up --build
+# Streamlit:  http://localhost:8501
+# FastAPI:    http://localhost:8000
+# Qdrant:     http://localhost:6333
+```
+
+`make up` / `make down` (from `backend/`) wrap the same commands.
 
 ## Architecture at a glance
 
@@ -119,18 +164,4 @@ NerdFarm/
 ├── Makefile                     # make setup · make demo · make test · make up
 └── README.md                    # you are here
 ```
-
----
-
-## Documentation
-
-
-| Doc                                                                            | Purpose                                                                    |
-| ------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
-| `[backend/docs/FEATURE_REQUIREMENTS.md](backend/docs/FEATURE_REQUIREMENTS.md)` | What the system must do — MoSCoW requirements mapped to the rubric         |
-| `[backend/docs/DATA_FLOW.md](backend/docs/DATA_FLOW.md)`                       | How data moves — agent topology, schemas, storage layout, improvement loop |
-| `[backend/docs/BACKEND_DESIGN.md](backend/docs/BACKEND_DESIGN.md)`             | Which libraries / models / patterns and why — benchmark-backed picks       |
-| `[backend/data/INVENTORY.md](backend/data/INVENTORY.md)`                       | Document corpus inventory grouped by extraction difficulty                 |
-| `[backend/docs/AI Engineer - Assessment.pdf](backend/docs/)`                   | Original assessment brief                                                  |
-
 
