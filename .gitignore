@@ -1,0 +1,28 @@
+# Secrets 
+.env
+.env.*
+!.env.example
+
+
+# Python 
+__pycache__/
+.venv/
+
+env/
+.python-version
+.pytest_cache/
+
+
+
+
+# IDE / editor 
+.vscode/
+.idea/
+.cursor/
+
+
+# OS 
+.DS_Store
+
+# Claude Code local state 
+.claude/
