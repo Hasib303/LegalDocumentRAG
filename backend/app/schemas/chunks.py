@@ -1,5 +1,3 @@
-"""Retrievable chunks — what the indexer writes and retrieval reads."""
-
 from __future__ import annotations
 
 from pydantic import BaseModel, Field
@@ -8,7 +6,6 @@ from app.schemas._types import ExtractionMethod
 
 
 class Chunk(BaseModel):
-    """Indexed text span with stable id and provenance back to its source."""
 
     chunk_id: str
     document_id: str

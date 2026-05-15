@@ -1,10 +1,3 @@
-"""Draft schema — the structured grounded output produced by the drafting agent.
-
-Every bullet either cites at least one ``chunk_id`` from the retrieved set or
-is marked ``unsupported``. The chunk-id whitelist is enforced by a Pydantic
-validator at parse time so fabricated citations cannot escape the agent.
-"""
-
 from __future__ import annotations
 
 from datetime import datetime

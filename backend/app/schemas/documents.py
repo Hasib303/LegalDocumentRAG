@@ -1,5 +1,3 @@
-"""Document ingestion and processing schemas."""
-
 from __future__ import annotations
 
 from datetime import date, datetime
@@ -10,7 +8,6 @@ from app.schemas._types import ExtractionMethod
 
 
 class DocumentManifest(BaseModel):
-    """Result of ingesting a raw file. SHA-256 makes the id idempotent."""
 
     document_id: str
     sha256: str
@@ -55,7 +52,6 @@ class TextBlock(BaseModel):
 
 
 class Annotation(BaseModel):
-    """Margin notes, stamps, signatures — anything not part of the body text."""
 
     annotation_id: str
     text: str

@@ -1,9 +1,3 @@
-"""Pydantic message contracts shared across agents.
-
-Schemas are the only types crossing agent boundaries. Agents never import
-each other; they exchange instances of the models exported here.
-"""
-
 from app.schemas._types import EditType, ExtractionMethod
 from app.schemas.chunks import Chunk
 from app.schemas.documents import (

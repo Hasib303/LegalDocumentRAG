@@ -1,5 +1,3 @@
-"""Retrieval results — what the retrieval agent hands to drafting."""
-
 from __future__ import annotations
 
 from datetime import datetime

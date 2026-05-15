@@ -1,5 +1,3 @@
-"""Operator-edit capture — bullet-level alignment and classification."""
-
 from __future__ import annotations
 
 from datetime import datetime
@@ -13,8 +11,6 @@ EditAction = Literal["modified", "added", "removed", "reordered"]
 
 
 class EditAlignment(BaseModel):
-    """One bullet's worth of edit. ``before``/``after`` interpretation depends
-    on ``action`` — see the validator for the invariants."""
 
     bullet_id: str
     action: EditAction

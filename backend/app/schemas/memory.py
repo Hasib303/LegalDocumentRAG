@@ -1,9 +1,3 @@
-"""StyleMemory — versioned learned preferences extracted from operator edits.
-
-Four orthogonal stores. Terminology and section rules are deterministic and
-inspectable; the exemplar store carries nuance that rules cannot.
-"""
-
 from __future__ import annotations
 
 from datetime import datetime
@@ -14,8 +8,6 @@ from app.schemas._types import EditType
 
 
 class TerminologyEntry(BaseModel):
-    """A substitution graduates from observation to rule once ``frequency`` >=
-    the configured threshold (default 2 across distinct matters)."""
 
     model_config = ConfigDict(populate_by_name=True)
 
@@ -33,7 +25,6 @@ class SectionRule(BaseModel):
 
 
 class Exemplar(BaseModel):
-    """A single edited bullet retained as a few-shot example for future drafts."""
 
     exemplar_id: str
     section_id: str
