@@ -1,10 +1,3 @@
-"""Typed configuration loader.
-
-Reads ``config.yaml`` plus environment variables and exposes one immutable
-``Settings`` object. Validation runs once at import time so misconfiguration
-fails fast and loudly.
-"""
-
 from __future__ import annotations
 
 from functools import lru_cache
@@ -79,7 +72,6 @@ class Paths(BaseModel):
     logs: Path
 
     def resolve_all(self, base: Path) -> Paths:
-        """Return a copy with every relative path anchored to ``base``."""
         resolved = {
             name: (base / value).resolve() if not value.is_absolute() else value
             for name, value in self.model_dump().items()
@@ -99,7 +91,6 @@ class AppConfig(BaseModel):
 
 
 class EnvSecrets(BaseSettings):
-    """Secrets and runtime URLs from environment or ``.env``."""
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
@@ -119,7 +110,6 @@ class Settings(BaseModel):
 
 @lru_cache(maxsize=1)
 def get_settings(config_path: Path | None = None) -> Settings:
-    """Load and validate configuration. Cached for the process lifetime."""
     path = config_path or _DEFAULT_CONFIG_PATH
     raw = yaml.safe_load(path.read_text(encoding="utf-8"))
     config = AppConfig.model_validate(raw)

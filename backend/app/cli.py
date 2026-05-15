@@ -1,5 +1,3 @@
-"""Top-level CLI for the NerdFarm backend."""
-
 from __future__ import annotations
 
 import typer
@@ -18,18 +16,11 @@ console = Console()
 
 @app.command()
 def version() -> None:
-    """Print the installed version."""
     console.print(__version__)
 
 
 @app.command()
 def demo() -> None:
-    """Run the end-to-end demo on the bundled corpus.
-
-    The full pipeline (ingest → process → index → retrieve → draft → audit →
-    edit-loop → eval) is wired up in subsequent commits. This stub keeps the
-    entry point reachable from the moment the package is installable.
-    """
     console.print("[yellow]Demo entry point reserved. Implementation lands "
                   "in the orchestrator + agents commits.[/yellow]")
 
