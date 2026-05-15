@@ -62,6 +62,7 @@ class EvaluationSettings(BaseModel):
 class Paths(BaseModel):
     data_root: Path
     raw: Path
+    manifests: Path
     processed: Path
     chunks: Path
     vector_store: Path
