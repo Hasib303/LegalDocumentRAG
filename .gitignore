@@ -33,3 +33,4 @@ env/
   backend/data/style_memory/                                                                                                                                                                                         
   backend/data/evals/results/                                                                                                                                                                                      
   backend/logs/
+  backend/docs/
