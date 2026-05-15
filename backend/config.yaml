@@ -45,6 +45,7 @@ evaluation:
 paths:
   data_root: ./data
   raw: ./data
+  manifests: ./data/manifests
   processed: ./data/processed
   chunks: ./data/chunks
   vector_store: ./data/vector_store
