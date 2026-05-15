@@ -1,1 +1,3 @@
-"""FastAPI surface — the only thing the frontend talks to."""
+from app.api.main import app, create_app
+
+__all__ = ["app", "create_app"]
