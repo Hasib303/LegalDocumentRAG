@@ -1,7 +1,29 @@
-"""Provider abstractions for LLM, embedding, reranker, and vision backends.
+from app.providers.base import (
+    EmbeddingProvider,
+    LLMProvider,
+    ProviderConfigError,
+    ProviderError,
+    ProviderInvocationError,
+    RerankerProvider,
+    VisionProvider,
+)
+from app.providers.factory import (
+    embedding_provider,
+    llm_provider,
+    reranker_provider,
+    vision_provider,
+)
 
-Each capability is exposed as a ``Protocol``; concrete implementations
-(Gemini, Groq, Ollama, sentence-transformers, …) live in sibling modules
-and are selected via ``config.yaml``. Swapping a provider is a one-line
-config change — no agent code touches a specific SDK.
-"""
+__all__ = [
+    "EmbeddingProvider",
+    "LLMProvider",
+    "ProviderConfigError",
+    "ProviderError",
+    "ProviderInvocationError",
+    "RerankerProvider",
+    "VisionProvider",
+    "embedding_provider",
+    "llm_provider",
+    "reranker_provider",
+    "vision_provider",
+]
