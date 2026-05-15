@@ -1,0 +1,16 @@
+matters:
+  - id: matter_delaware_health
+    name: Delaware Health Cases
+    matter_type: medical_complaint
+    held_out: false
+    documents:
+      - clean_borndigital/delaware_kober_v_cchs_complaint.pdf
+      - clean_borndigital/delaware_burris_v_bayhealth_complaint.pdf
+
+  - id: matter_sdny_letters
+    name: SDNY Attorney Letters
+    matter_type: attorney_correspondence
+    held_out: true
+    documents:
+      - clean_borndigital/recap_nysd_590045_letter.pdf
+      - clean_borndigital/recap_nysd_615842_mccawley_letter.pdf
