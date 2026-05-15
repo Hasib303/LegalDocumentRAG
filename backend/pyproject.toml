@@ -1,0 +1,86 @@
+[project]
+name = "nerdfarm"
+version = "0.1.0"
+description = "Agentic legal-document AI workflow — messy documents in, grounded drafts out, smarter with every operator edit."
+readme = "../README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Hasib" }]
+
+dependencies = [
+    # Core
+    "pydantic>=2.7",
+    "pydantic-settings>=2.4",
+    "PyYAML>=6.0.2",
+    "typer>=0.12",
+    "rich>=13.7",
+    "structlog>=24.4",
+
+    # Document processing
+    "pymupdf>=1.24",
+    "pymupdf4llm>=0.0.17",
+    "docling>=2.0",
+    "Pillow>=10.4",
+
+    # Embeddings + retrieval
+    "sentence-transformers>=3.0",
+    "bm25s>=0.2",
+    "qdrant-client>=1.11",
+    "scipy>=1.13",
+    "numpy>=1.26,<2.2",
+
+    # Generation / model providers
+    "instructor>=1.6",
+    "google-genai>=1.0",
+    "groq>=0.11",
+
+    # API
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.30",
+    "httpx>=0.27",
+
+    # Evaluation + edit alignment
+    "deepeval>=1.0",
+    "diff-match-patch>=20230430",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.5",
+    "mypy>=1.10",
+]
+
+[project.scripts]
+nerdfarm = "app.cli:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[tool.uv]
+package = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4", "SIM", "RUF", "N", "ANN"]
+ignore = ["E501", "ANN101", "ANN102"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["ANN", "D"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+plugins = ["pydantic.mypy"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra -q --strict-markers"
