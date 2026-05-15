@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TypeVar
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError
 
 from app.providers.base import ProviderInvocationError
 
@@ -45,3 +45,7 @@ class GroqLLMProvider:
             )
         except GroqError as exc:
             raise ProviderInvocationError(f"Groq {self._model} failed: {exc}") from exc
+        except ValidationError as exc:
+            raise ProviderInvocationError(
+                f"Groq {self._model} schema validation failed: {exc}"
+            ) from exc
