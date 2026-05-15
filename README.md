@@ -1,10 +1,8 @@
 # NerdFarm
 
-> **Legal Document AI Workflow** — built for the fictional Pearson Specter Litt.
-> Messy documents in, grounded drafts out, smarter with every operator edit.
+> **Legal Document AI Workflow** — built for the fictional Pearson Specter Litt. Messy documents in, grounded drafts out, smarter with every operator edit.
 
-AI Engineer take-home assessment for [Ideabuilders.studio](https://ideabuilders.studio).
-Deadline: **2026-05-15 EOD**.
+
 
 ---
 
